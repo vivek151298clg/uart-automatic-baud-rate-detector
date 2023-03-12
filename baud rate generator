@@ -1,0 +1,46 @@
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  Serial.println("baud rate generator");
+  pinMode(13,OUTPUT);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  //Serial.begin(300);
+  /*Serial.begin(600);
+  Serial.begin(1200);
+  Serial.begin(2400);
+  Serial.begin(4800);
+  Serial.begin(9600);
+  Serial.begin(14400);
+  */
+  Serial.begin(2400);
+  digitalWrite(13,HIGH);
+  Serial.println("set baud rate at 300");
+  delay(500);
+  digitalWrite(13,LOW);
+  delay(500);
+
+  Serial.begin(4800);
+  digitalWrite(13,HIGH);
+  Serial.println("set baud rate at 600");
+  delay(500);
+  digitalWrite(13,LOW);
+  delay(500);
+
+  Serial.begin(9600);
+  digitalWrite(13,HIGH);
+  Serial.println("set baud rate at 9600");
+  delay(500);
+  digitalWrite(13,LOW);
+  delay(500);
+
+  Serial.begin(115200);
+  digitalWrite(13,HIGH);
+  Serial.println("set baud rate at 115200");
+  delay(500);
+  digitalWrite(13,LOW);
+  delay(500);
+}
