@@ -1,0 +1,64 @@
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  Serial.println("baud rate reader ......!");
+  pinMode(13,INPUT);
+}
+long last_baud = 0,current_baud=0;
+int rate=10000;
+void loop() {
+  // put your main code here, to run repeatedly:
+  current_baud = detRate(13);
+  //Serial.print("baud test = ");
+  //Serial.println(current_baud);
+  if(current_baud != last_baud)
+    {
+      Serial.print("baud test = ");
+      Serial.println(current_baud);
+      last_baud =  current_baud;
+      delay(300);
+    }
+}
+
+long detRate(int recpin)
+{
+  long baud,x;
+  rate=10000;
+for(int i=0;i<5;i++)
+{
+  while(digitalRead(recpin) == 1){} // wait for low bit to start
+  x = pulseIn(recpin,LOW); // measure the next zero bit width
+  rate = x < rate ? x : rate;
+}
+Serial.print("rate : ");Serial.println(rate);
+
+if(rate < 12)
+  baud = 115200;
+else if(rate < 20)
+ baud =57600;
+else if(rate < 29)
+ baud = 38400;
+else if(rate < 40)
+ baud =28800;
+else if(rate < 60)
+ baud =19200;
+else if(rate < 80)
+ baud =14400;
+else if(rate < 150)
+ baud =9600;
+else if(rate < 300)
+ baud =4800;
+else if(rate < 600)
+ baud =2400;
+else if(rate < 1200)
+ baud =1200;
+else if(rate < 2400)
+ baud =600;
+else if(rate < 4800)
+ baud =300;
+else
+ baud =0;
+
+return baud;
+}
+
